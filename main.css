@@ -8,12 +8,12 @@ body {
     background-image: url(./assets/images/background.jpg);
     background-repeat: repeat;
     background-position: center center;
-    background-color: #fff;
+    background-color: #fbfbfb;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1em 0em;
+    padding: 2em 0em;
     margin: 0em;
     width: 100vw;
     height: 100vh;
@@ -47,6 +47,10 @@ column {
     text-align: center;
 }
 
+.center-p {
+    margin: 0.3em;
+}
+
 footer {
     display: flex;
     flex-direction: column;
@@ -78,8 +82,12 @@ form {
     border: 0px;
     border-radius: 10px;
     color: #212121;
-    background-color: #eee;
+    background-color: #e2e2e2;
     width: 90%;
+}
+
+::placeholder {
+    color: #565656;
 }
 
 .button {
@@ -89,13 +97,13 @@ form {
     border: 0px;
     border-radius: 10px;
     color: #212121;
-    background-color: #eee;
+    background-color: #e2e2e2;
     cursor: pointer;
 }
 
 .button:active {
     background-color: #212121;
-    color: #fff;
+    color: #fbfbfb;
 }
 
 .list-container {
@@ -111,7 +119,7 @@ form {
     display: flex;
     flex-direction: column;
     row-gap: 0.5em;
-    background-color: #eee;
+    background-color: #e2e2e2;
     padding: 1em;
     border-radius: 10px;
     width: 30%;
@@ -126,7 +134,7 @@ form {
 }
 
 .task {
-    background-color: #fff;
+    background-color: #fbfbfb;
     color: #212121;
     padding: 1em;
     border-radius: 10px;
@@ -138,7 +146,7 @@ form {
 
 .is-dragging {
     background-color: #212121;
-    color: #fff;
+    color: #fbfbfb;
 }
 
 @media only screen and (max-width: 750px) {
@@ -153,5 +161,8 @@ form {
     }
     .task {
         font-size: 1.3em;
+    }
+    .center-p {
+        font-size: 1.5em;
     }
 }
