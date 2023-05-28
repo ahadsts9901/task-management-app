@@ -43,6 +43,17 @@ row {
     /* width: 100%; */
 }
 
+.row-task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0em;
+    column-gap: 0.5em;
+    padding-bottom: 0em;
+    /* border-bottom: 2px dashed #212121; */
+    /* width: 100%; */
+}
+
 column {
     display: flex;
     justify-content: center;
@@ -200,6 +211,7 @@ i {
 
 .task-delete-button {
     color: #212121;
+    width: 1em;
 }
 
 .is-dragging {
@@ -207,8 +219,15 @@ i {
     color: #fbfbfb;
 }
 
-.para {
+.para,
+.mine {
     margin: 0em;
+}
+
+.task-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 @media only screen and (max-width: 750px) {

@@ -75,9 +75,10 @@ function makeTask(event) {
     if (!userTodo) return;
 
     let newWork = document.createElement("p");
-    newWork.className = "task";
+    newWork.setAttribute("class", "task-flex");
+    newWork.className += " task";
     newWork.setAttribute("draggable", "true");
-    newWork.innerText = userTodo;
+
 
     newWork.addEventListener("dragstart", () => {
         newWork.className += " is-dragging";
@@ -89,10 +90,25 @@ function makeTask(event) {
 
     list.appendChild(newWork);
 
+    let span = document.createElement("p");
+    span.setAttribute("class", "mine");
+    span.innerText = userTodo;
+    newWork.appendChild(span);
+
+    let row = document.createElement("div")
+    row.className += " row-task"
+    newWork.appendChild(row)
+
+    let editTask = document.createElement("i");
+    editTask.className += " bi bi-pencil-fill task-delete-button";
+    editTask.addEventListener("click", editPresentTask);
+    row.appendChild(editTask);
+
     let deleteTask = document.createElement("i");
     deleteTask.className += " bi bi-trash-fill task-delete-button";
     deleteTask.addEventListener("click", deletePresentTask);
-    newWork.appendChild(deleteTask);
+    row.appendChild(deleteTask);
+
 
     submitTask.previousElementSibling.value = "";
 
@@ -162,6 +178,15 @@ function deletePresentTask(event) {
 function editColumn(event) {
     let edit = event.target;
     let whatToEdit = edit.parentNode.parentNode.parentNode.firstChild;
+    let value = whatToEdit.value
+    let newTitle = prompt("Enter New Title");
+    whatToEdit.textContent = newTitle;
+}
+
+function editPresentTask(event) {
+    let editTask = event.target;
+    let whatToEdit = editTask.parentNode.parentNode.firstChild;
+    let value = whatToEdit.value
     let newTitle = prompt("Enter New Title");
     whatToEdit.textContent = newTitle;
 }
