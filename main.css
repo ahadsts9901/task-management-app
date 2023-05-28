@@ -132,13 +132,17 @@ form {
     background-color: #e2e2e2;
     padding: 1em;
     border-radius: 10px;
-    width: 20em;
-    min-width: 20em;
+    width: 18em;
+    min-width: 18em;
 }
 
 .list h2 {
     font-size: 1.5em;
     font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 0.3em;
+    align-items: center;
 }
 
 .input-white {
@@ -148,7 +152,7 @@ form {
     border-radius: 10px;
     color: #212121;
     background-color: #fbfbfb;
-    width: 40%;
+    width: 60%;
     margin-bottom: 0.3em;
     margin: 0em;
 }
@@ -173,7 +177,7 @@ form {
 .delete-column-button {
     width: 3em;
     margin: 0em;
-    justify-self: baseline;
+    margin-left: 0.3em;
 }
 
 i {
@@ -201,6 +205,10 @@ i {
 .is-dragging {
     background-color: #212121;
     color: #fbfbfb;
+}
+
+.para {
+    margin: 0em;
 }
 
 @media only screen and (max-width: 750px) {

@@ -13,9 +13,13 @@ form.addEventListener("submit", (event) => {
     listContainer.appendChild(newList);
 
     let listHeading = document.createElement("h2");
-    listHeading.innerText = userTodo;
     listHeading.className = "center";
     newList.appendChild(listHeading);
+
+    let span = document.createElement("p");
+    span.innerText = userTodo;
+    span.setAttribute("class", "para");
+    listHeading.appendChild(span);
 
     let row = document.createElement("div");
     row.className = "row";
@@ -33,6 +37,10 @@ form.addEventListener("submit", (event) => {
     listButton.addEventListener("click", makeTask);
     row.appendChild(listButton);
 
+    let rowSecond = document.createElement("div");
+    row.className = "row";
+    listHeading.appendChild(rowSecond);
+
     let deleteButton = document.createElement("button");
     deleteButton.setAttribute(
         "class",
@@ -40,7 +48,16 @@ form.addEventListener("submit", (event) => {
     );
     deleteButton.innerHTML = '<i class="bi bi-trash-fill"></i>';
     deleteButton.addEventListener("click", deleteColumn);
-    row.appendChild(deleteButton);
+    rowSecond.appendChild(deleteButton);
+
+    let editButton = document.createElement("button");
+    editButton.setAttribute(
+        "class",
+        "btn btn-success danger btn-sm delete-column-button"
+    );
+    editButton.innerHTML = '<i class="bi bi-pencil-fill"></i>';
+    editButton.addEventListener("click", editColumn);
+    rowSecond.appendChild(editButton);
 
     userInput.value = "";
 });
@@ -140,4 +157,11 @@ function deletePresentTask(event) {
     let button = event.target;
     let task = button.closest(".task");
     task.remove();
+}
+
+function editColumn(event) {
+    let edit = event.target;
+    let whatToEdit = edit.parentNode.parentNode.parentNode.firstChild;
+    let newTitle = prompt("Enter New Title");
+    whatToEdit.textContent = newTitle;
 }
