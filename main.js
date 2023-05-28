@@ -1,8 +1,6 @@
-// for todo app
-
-let form = document.querySelector('form');
-let userInput = document.querySelector('.input');
-let todoList = document.getElementById("todo-list");
+let form = document.querySelector("form");
+let userInput = document.querySelector(".input");
+let listContainer = document.querySelector(".list-container");
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -10,8 +8,57 @@ form.addEventListener("submit", (event) => {
 
     if (!userTodo) return;
 
+    let newList = document.createElement("div");
+    newList.className = "list";
+    listContainer.appendChild(newList);
+
+    let listHeading = document.createElement("h2");
+    listHeading.innerText = userTodo;
+    listHeading.className = "center";
+    newList.appendChild(listHeading);
+
+    let row = document.createElement("div");
+    row.className = "row";
+    newList.appendChild(row);
+
+    let listInput = document.createElement("input");
+    listInput.setAttribute("type", "text");
+    listInput.setAttribute("placeholder", "Enter Task...");
+    listInput.className = "input-white";
+    row.appendChild(listInput);
+
+    let listButton = document.createElement("button");
+    listButton.setAttribute("class", "list-button");
+    listButton.innerText = "Add +";
+    listButton.addEventListener("click", makeTask);
+    row.appendChild(listButton);
+
+    let deleteButton = document.createElement("button");
+    deleteButton.setAttribute(
+        "class",
+        "btn btn-danger btn-sm delete-column-button"
+    );
+    deleteButton.innerHTML = '<i class="bi bi-trash-fill"></i>';
+    deleteButton.addEventListener("click", deleteColumn);
+    row.appendChild(deleteButton);
+
+    userInput.value = "";
+});
+
+function makeTask(event) {
+    event.preventDefault();
+
+    let submitTask = event.target;
+    let list = submitTask.parentNode.parentNode;
+
+    let userTodo = submitTask.previousElementSibling.value;
+
+    console.log(submitTask.previousElementSibling.value);
+
+    if (!userTodo) return;
+
     let newWork = document.createElement("p");
-    newWork.className += " task";
+    newWork.className = "task";
     newWork.setAttribute("draggable", "true");
     newWork.innerText = userTodo;
 
@@ -20,44 +67,46 @@ form.addEventListener("submit", (event) => {
     });
 
     newWork.addEventListener("dragend", () => {
-        newWork.className = " task";
+        newWork.className = "task";
     });
 
-    todoList.appendChild(newWork);
+    list.appendChild(newWork);
 
-    userInput.value = "";
-});
+    let deleteTask = document.createElement("i");
+    deleteTask.className += " bi bi-trash-fill task-delete-button";
+    deleteTask.addEventListener("click", deletePresentTask);
+    newWork.appendChild(deleteTask);
 
+    submitTask.previousElementSibling.value = "";
 
-// for drag and drop
+    // Update draggables and droppables after adding a new task
+    let draggables = list.querySelectorAll(".task");
+    let droppables = document.querySelectorAll(".list");
 
-
-let draggables = document.querySelectorAll(".task");
-let droppables = document.querySelectorAll(".list");
-
-draggables.forEach((task) => {
-    task.addEventListener("dragstart", () => {
-        task.className += " is-dragging";
+    draggables.forEach((task) => {
+        task.addEventListener("dragstart", () => {
+            task.className += " is-dragging";
+        });
+        task.addEventListener("dragend", () => {
+            task.className = "task";
+        });
     });
-    task.addEventListener("dragend", () => {
-        task.className = " task";
+
+    droppables.forEach((zone) => {
+        zone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+
+            let bottomTask = insertAboveTask(zone, e.clientY);
+            let curTask = document.querySelector(".is-dragging");
+
+            if (!bottomTask) {
+                zone.appendChild(curTask);
+            } else {
+                zone.insertBefore(curTask, bottomTask);
+            }
+        });
     });
-});
-
-droppables.forEach((zone) => {
-    zone.addEventListener("dragover", (e) => {
-        e.preventDefault();
-
-        let bottomTask = insertAboveTask(zone, e.clientY);
-        let curTask = document.querySelector(".is-dragging");
-
-        if (!bottomTask) {
-            zone.appendChild(curTask);
-        } else {
-            zone.insertBefore(curTask, bottomTask);
-        }
-    });
-});
+}
 
 let insertAboveTask = (zone, mouseY) => {
     let els = zone.querySelectorAll(".task:not(.is-dragging)");
@@ -78,3 +127,17 @@ let insertAboveTask = (zone, mouseY) => {
 
     return closestTask;
 };
+
+function deleteColumn(event) {
+    event.stopPropagation();
+    let button = event.target;
+    let column = button.closest(".list");
+    column.remove();
+}
+
+function deletePresentTask(event) {
+    event.stopPropagation();
+    let button = event.target;
+    let task = button.closest(".task");
+    task.remove();
+}

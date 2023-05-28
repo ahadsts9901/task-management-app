@@ -1,5 +1,5 @@
 * {
-    font-family: 'Poppins', 'sans-serif';
+    font-family: "Poppins", "sans-serif";
     font-weight: bold;
 }
 
@@ -13,7 +13,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2em 0em;
+    padding: 2em 0.5em;
     margin: 0em;
     width: 100vw;
     height: 100vh;
@@ -29,6 +29,17 @@ row {
     align-items: center;
     padding: 0.5em;
     column-gap: 1em;
+    /* width: 100%; */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0em;
+    column-gap: 0.5em;
+    padding-bottom: 1em;
+    /* border-bottom: 2px dashed #212121; */
     /* width: 100%; */
 }
 
@@ -69,7 +80,7 @@ footer {
 }
 
 form {
-    padding: 2em;
+    padding: 0.5em;
     display: flex;
     justify-content: left;
     align-items: center;
@@ -84,10 +95,6 @@ form {
     color: #212121;
     background-color: #e2e2e2;
     width: 90%;
-}
-
-::placeholder {
-    color: #565656;
 }
 
 .button {
@@ -108,11 +115,14 @@ form {
 
 .list-container {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: start;
     column-gap: 1em;
     padding: 1em 2em;
+    width: 100%;
     height: 100%;
+    overflow-y: hidden;
+    overflow-x: scroll;
 }
 
 .list {
@@ -122,15 +132,52 @@ form {
     background-color: #e2e2e2;
     padding: 1em;
     border-radius: 10px;
-    width: 30%;
+    width: 20em;
+    min-width: 20em;
 }
 
-.list h3 {
+.list h2 {
     font-size: 1.5em;
-    margin-bottom: 0.7em;
     font-weight: bold;
-    padding-bottom: 0.5em;
-    border-bottom: 2px dashed #212121;
+}
+
+.input-white {
+    font-size: 1em;
+    padding: 0.5em 1em;
+    border: 0px;
+    border-radius: 10px;
+    color: #212121;
+    background-color: #fbfbfb;
+    width: 40%;
+    margin-bottom: 0.3em;
+    margin: 0em;
+}
+
+.list-button {
+    font-size: 1em;
+    width: 30%;
+    height: 100%;
+    padding: 0.5em;
+    border: 0px;
+    border-radius: 10px;
+    color: #212121;
+    background-color: #fbfbfb;
+    cursor: pointer;
+}
+
+.list-button:active {
+    background-color: #212121;
+    color: #fbfbfb;
+}
+
+.delete-column-button {
+    width: 3em;
+    margin: 0em;
+    justify-self: baseline;
+}
+
+i {
+    font-style: normal;
 }
 
 .task {
@@ -142,6 +189,13 @@ form {
     cursor: move;
     margin: 0em;
     margin-bottom: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-delete-button {
+    color: #212121;
 }
 
 .is-dragging {
@@ -151,18 +205,18 @@ form {
 
 @media only screen and (max-width: 750px) {
     body {
-        font-size: 0.5em;
+        font-size: 0.7em;
     }
-    .input {
-        font-size: 2em;
-    }
-    .button {
-        font-size: 2em;
-    }
+    .input,
+    .button,
     .task {
         font-size: 1.3em;
     }
     .center-p {
-        font-size: 1.5em;
+        width: 80%;
+        font-size: 1.2em;
+    }
+    .center {
+        font-size: 1.2em;
     }
 }
