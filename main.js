@@ -79,7 +79,6 @@ function makeTask(event) {
     newWork.className += " task";
     newWork.setAttribute("draggable", "true");
 
-
     newWork.addEventListener("dragstart", () => {
         newWork.className += " is-dragging";
     });
@@ -95,9 +94,9 @@ function makeTask(event) {
     span.innerText = userTodo;
     newWork.appendChild(span);
 
-    let row = document.createElement("div")
-    row.className += " row-task"
-    newWork.appendChild(row)
+    let row = document.createElement("div");
+    row.className += " row-task";
+    newWork.appendChild(row);
 
     let editTask = document.createElement("i");
     editTask.className += " bi bi-pencil-fill task-delete-button";
@@ -108,7 +107,6 @@ function makeTask(event) {
     deleteTask.className += " bi bi-trash-fill task-delete-button";
     deleteTask.addEventListener("click", deletePresentTask);
     row.appendChild(deleteTask);
-
 
     submitTask.previousElementSibling.value = "";
 
@@ -178,7 +176,7 @@ function deletePresentTask(event) {
 function editColumn(event) {
     let edit = event.target;
     let whatToEdit = edit.parentNode.parentNode.parentNode.firstChild;
-    let value = whatToEdit.value
+    // let value = whatToEdit.value;
     let newTitle = prompt("Enter New Title");
     whatToEdit.textContent = newTitle;
 }
@@ -186,7 +184,7 @@ function editColumn(event) {
 function editPresentTask(event) {
     let editTask = event.target;
     let whatToEdit = editTask.parentNode.parentNode.firstChild;
-    let value = whatToEdit.value
+    // let value = whatToEdit.value;
     let newTitle = prompt("Enter New Title");
     whatToEdit.textContent = newTitle;
 }
