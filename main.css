@@ -145,6 +145,7 @@ form {
     border-radius: 10px;
     width: 20em;
     min-width: 20em;
+    height: 100%;
 }
 
 .list h2 {
