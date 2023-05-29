@@ -13,7 +13,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2em 0.5em;
+    padding: 4em 0.5em 2em 0.5em;
     margin: 0em;
     width: 100vw;
     height: 100vh;
@@ -144,7 +144,7 @@ form {
     min-height: 100%;
     overflow-y: auto;
     overflow-x: auto;
-    margin-top: 4em;
+    margin-top: 8em;
 }
 
 .list {
@@ -232,6 +232,7 @@ i {
 .is-dragging {
     background-color: #212121;
     color: #fbfbfb;
+    transform: rotate(-12deg);
 }
 
 .mine {

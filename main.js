@@ -1,9 +1,11 @@
 let form = document.querySelector("form");
 let userInput = document.querySelector(".input");
 let listContainer = document.querySelector(".list-container");
+let heading = document.getElementById("center");
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
+    heading.style.display = "none";
     let userTodo = userInput.value;
 
     if (!userTodo) return;
