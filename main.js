@@ -38,7 +38,7 @@ form.addEventListener("submit", (event) => {
     row.appendChild(listButton);
 
     let rowSecond = document.createElement("div");
-    row.className = "row";
+    rowSecond.className = "row";
     listHeading.appendChild(rowSecond);
 
     let deleteButton = document.createElement("button");
