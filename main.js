@@ -179,17 +179,18 @@ function editColumn(event) {
 
     let edit = event.target;
 
-    let column = edit.parentNode.parentNode.parentNode;
+    let column = edit.closest(".list");
 
-    let listHeading = column.querySelector("h2");
+    let listHeading = column.querySelector("h2 .para");
 
-    let text = listHeading.querySelector("span");
-    
     let newTitle = prompt("Enter New Title");
 
-    text.textContent = newTitle;
+    listHeading.textContent = newTitle;
 
 }
+
+
+
 
 function editPresentTask(event) {
     event.stopPropagation();
