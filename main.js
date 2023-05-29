@@ -175,7 +175,7 @@ function deletePresentTask(event) {
 
 function editColumn(event) {
     let edit = event.target;
-    let whatToEdit = edit.parentNode.parentNode.parentNode.firstChild;
+    let whatToEdit = edit.parentNode.parentNode.firstChild;
     // let value = whatToEdit.value;
     let newTitle = prompt("Enter New Title");
     whatToEdit.textContent = newTitle;
