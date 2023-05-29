@@ -14,32 +14,21 @@ form.addEventListener("submit", (event) => {
 
     let listHeading = document.createElement("h2");
     listHeading.className = "center";
+    listHeading.innerText = userTodo;
     newList.appendChild(listHeading);
 
-    let span = document.createElement("p");
-    span.innerText = userTodo;
-    span.setAttribute("class", "para");
-    listHeading.appendChild(span);
-
-    let row = document.createElement("div");
-    row.className = "row";
-    newList.appendChild(row);
-
-    let listInput = document.createElement("input");
-    listInput.setAttribute("type", "text");
-    listInput.setAttribute("placeholder", "Enter Task...");
-    listInput.className = "input-white";
-    row.appendChild(listInput);
-
-    let listButton = document.createElement("button");
-    listButton.setAttribute("class", "list-button");
-    listButton.innerText = "Add +";
-    listButton.addEventListener("click", makeTask);
-    row.appendChild(listButton);
-
     let rowSecond = document.createElement("div");
-    row.className = "row";
-    listHeading.appendChild(rowSecond);
+    rowSecond.className = "row-task";
+    newList.appendChild(rowSecond);
+
+    let commentButton = document.createElement("button");
+    commentButton.setAttribute(
+        "class",
+        "btn btn-primary btn-sm delete-column-button"
+    );
+    commentButton.innerHTML = '<i class="bi bi-chat-dots-fill"></i>';
+    commentButton.addEventListener("click", commentColumn);
+    rowSecond.appendChild(commentButton);
 
     let deleteButton = document.createElement("button");
     deleteButton.setAttribute(
@@ -58,6 +47,28 @@ form.addEventListener("submit", (event) => {
     editButton.innerHTML = '<i class="bi bi-pencil-fill"></i>';
     editButton.addEventListener("click", editColumn);
     rowSecond.appendChild(editButton);
+
+    let comment = document.createElement("p");
+    comment.className += " comment";
+    let userComment = "";
+    comment.innerText = userComment;
+    newList.appendChild(comment);
+
+    let row = document.createElement("div");
+    row.className = "row";
+    newList.appendChild(row);
+
+    let listInput = document.createElement("input");
+    listInput.setAttribute("type", "text");
+    listInput.setAttribute("placeholder", "Enter Task...");
+    listInput.className = "input-white";
+    row.appendChild(listInput);
+
+    let listButton = document.createElement("button");
+    listButton.setAttribute("class", "list-button");
+    listButton.innerText = "Add +";
+    listButton.addEventListener("click", makeTask);
+    row.appendChild(listButton);
 
     userInput.value = "";
 });
@@ -79,6 +90,10 @@ function makeTask(event) {
     newWork.className += " task";
     newWork.setAttribute("draggable", "true");
 
+    let taskRow = document.createElement("span");
+    taskRow.className += " task-upper-row";
+    newWork.appendChild(taskRow);
+
     newWork.addEventListener("dragstart", () => {
         newWork.className += " is-dragging";
     });
@@ -92,11 +107,16 @@ function makeTask(event) {
     let span = document.createElement("p");
     span.setAttribute("class", "mine");
     span.innerText = userTodo;
-    newWork.appendChild(span);
+    taskRow.appendChild(span);
 
     let row = document.createElement("div");
     row.className += " row-task";
-    newWork.appendChild(row);
+    taskRow.appendChild(row);
+
+    let commentTask = document.createElement("i");
+    commentTask.className += " bi bi-chat-dots-fill task-delete-button";
+    commentTask.addEventListener("click", commentPresentTask);
+    row.appendChild(commentTask);
 
     let editTask = document.createElement("i");
     editTask.className += " bi bi-pencil-fill task-delete-button";
@@ -107,6 +127,12 @@ function makeTask(event) {
     deleteTask.className += " bi bi-trash-fill task-delete-button";
     deleteTask.addEventListener("click", deletePresentTask);
     row.appendChild(deleteTask);
+
+    let comment = document.createElement("p");
+    comment.className += " task-comment";
+    let userComment = "";
+    comment.innerText = userComment;
+    newWork.appendChild(comment);
 
     submitTask.previousElementSibling.value = "";
 
@@ -177,20 +203,85 @@ function editColumn(event) {
     event.stopPropagation();
     let edit = event.target;
     let column = edit.closest(".list");
-    let listHeading = column.querySelector("h2 .para");
-    let newTitle = prompt("Enter New Title");
+    let listHeading = column.querySelector("h2");
+    let newTitle = prompt("Edit Title");
     if (newTitle !== null && newTitle.trim() !== "") {
         listHeading.textContent = newTitle;
     }
 }
 
-
 function editPresentTask(event) {
     event.stopPropagation();
     let editTask = event.target;
     let whatToEdit = editTask.parentNode.parentNode.firstChild;
-    let newTitle = prompt("Enter New Title");
+    let newTitle = prompt("Edit Task");
     if (newTitle !== null && newTitle.trim() !== "") {
         whatToEdit.textContent = newTitle;
     }
+}
+
+function commentColumn(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    let commentButton = event.target;
+    let commentContainer = commentButton
+        .closest(".list")
+        .querySelector(".comment");
+    commentContainer.className += " comment-container";
+    let newComment = prompt("Enter Comment");
+
+    if (newComment !== null && newComment.trim() !== "") {
+        let comment = document.createElement("p");
+        comment.className += " comment";
+        comment.textContent = newComment;
+        commentContainer.appendChild(comment);
+        let commentDelete = document.createElement("p");
+        commentDelete.innerHTML = "<i class='bi bi-trash-fill'></i>";
+        commentDelete.className += " comment-delete-margin";
+        commentDelete.addEventListener("click", commentColumnDelete);
+        comment.appendChild(commentDelete);
+    }
+}
+
+function commentColumnDelete(event) {
+    event.stopPropagation();
+    let button = event.target;
+    let column = button.closest(".comment");
+    column.remove();
+}
+
+function commentPresentTask(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    let commentButton = event.target;
+    let commentContainer = commentButton
+        .closest(".task")
+        .querySelector(".task-comment");
+    commentContainer.className += " comment-container";
+    let newComment = prompt("Enter Comment");
+
+    if (newComment !== null && newComment.trim() !== "") {
+        let TaskCommentRow = document.createElement("span");
+        TaskCommentRow.className += " comment-row";
+        commentContainer.appendChild(TaskCommentRow);
+        let comment = document.createElement("p");
+        comment.className += " task-comment";
+        comment.textContent = newComment;
+        TaskCommentRow.appendChild(comment);
+        //
+        let commentDelete = document.createElement("p");
+        commentDelete.innerHTML = "<i class='bi bi-trash-fill'></i>";
+        commentDelete.addEventListener("click", deleteTaskComment);
+        commentDelete.className += " comment-delete-margin";
+        TaskCommentRow.appendChild(commentDelete);
+    }
+}
+
+function deleteTaskComment(event) {
+    event.stopPropagation();
+    let button = event.target;
+    let column = button.closest(".comment-row");
+    column.remove();
 }
