@@ -174,29 +174,23 @@ function deletePresentTask(event) {
 }
 
 function editColumn(event) {
-
     event.stopPropagation();
-
     let edit = event.target;
-
     let column = edit.closest(".list");
-
     let listHeading = column.querySelector("h2 .para");
-
     let newTitle = prompt("Enter New Title");
-
-    listHeading.textContent = newTitle;
-
+    if (newTitle !== null && newTitle.trim() !== "") {
+        listHeading.textContent = newTitle;
+    }
 }
-
-
 
 
 function editPresentTask(event) {
     event.stopPropagation();
     let editTask = event.target;
     let whatToEdit = editTask.parentNode.parentNode.firstChild;
-    // let value = whatToEdit.value;
     let newTitle = prompt("Enter New Title");
-    whatToEdit.textContent = newTitle;
+    if (newTitle !== null && newTitle.trim() !== "") {
+        whatToEdit.textContent = newTitle;
+    }
 }

@@ -17,6 +17,7 @@ body {
     margin: 0em;
     width: 100vw;
     height: 100vh;
+    row-gap: 2em;
 }
 
 a {
@@ -81,6 +82,7 @@ footer {
     padding: 0.5em 1em;
     row-gap: 1em;
     /* width: 100%; */
+    margin-top: 7em;
 }
 
 .container {
@@ -96,6 +98,10 @@ form {
     justify-content: left;
     align-items: center;
     column-gap: 1em;
+    position: sticky;
+    top: 2em;
+    width: 100%;
+    z-index: 20;
 }
 
 .input {
@@ -132,8 +138,10 @@ form {
     padding: 1em 2em;
     width: 100%;
     height: 100%;
-    overflow-y: hidden;
+    min-height: 100%;
+    overflow-y: scroll;
     overflow-x: scroll;
+    margin-top: 4em;
 }
 
 .list {
@@ -145,7 +153,6 @@ form {
     border-radius: 10px;
     width: 20em;
     min-width: 20em;
-    height: 100%;
 }
 
 .list h2 {
