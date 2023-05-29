@@ -174,14 +174,15 @@ function deletePresentTask(event) {
 }
 
 function editColumn(event) {
+    event.stopPropagation();
     let edit = event.target;
-    let whatToEdit = edit.parentNode.parentNode.firstChild;
-    // let value = whatToEdit.value;
+    let whatToEdit = edit.parentNode.parentNode.previousElementSibling;
     let newTitle = prompt("Enter New Title");
     whatToEdit.textContent = newTitle;
 }
 
 function editPresentTask(event) {
+    event.stopPropagation();
     let editTask = event.target;
     let whatToEdit = editTask.parentNode.parentNode.firstChild;
     // let value = whatToEdit.value;
