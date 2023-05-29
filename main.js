@@ -183,9 +183,11 @@ function editColumn(event) {
 
     let listHeading = column.querySelector("h2");
 
+    let text = listHeading.querySelector("span");
+    
     let newTitle = prompt("Enter New Title");
 
-    listHeading.textContent = newTitle;
+    text.textContent = newTitle;
 
 }
 
