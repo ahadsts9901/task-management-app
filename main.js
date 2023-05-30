@@ -211,7 +211,7 @@ function editColumn(event) {
     let edit = event.target;
     let column = edit.closest(".list");
     let listHeading = column.querySelector("h2");
-    let newTitle = prompt("Edit Title");
+    let newTitle = prompt("Edit Title", listHeading.innerText);
     if (newTitle !== null && newTitle.trim() !== "") {
         listHeading.textContent = newTitle;
     }
@@ -221,7 +221,7 @@ function editPresentTask(event) {
     event.stopPropagation();
     let editTask = event.target;
     let whatToEdit = editTask.parentNode.parentNode.firstChild;
-    let newTitle = prompt("Edit Task");
+    let newTitle = prompt("Edit Task", whatToEdit.innerText);
     if (newTitle !== null && newTitle.trim() !== "") {
         whatToEdit.textContent = newTitle;
     }
