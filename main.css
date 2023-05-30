@@ -52,6 +52,7 @@ row {
     column-gap: 0.4em;
     padding-bottom: 0em;
     margin-left: 0.5em;
+    align-self: flex-start;
     /* border-bottom: 2px dashed #212121; */
     /* width: 100%; */
 }
@@ -103,6 +104,8 @@ form {
     top: 2em;
     width: 100%;
     z-index: 20;
+    border: 6px solid #fbfbfb;
+    background-color: #fbfbfb;
 }
 
 .input {
@@ -140,11 +143,38 @@ form {
     column-gap: 1em;
     padding: 1em 2em;
     width: 100%;
-    height: 100%;
-    min-height: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: auto;
-    margin-top: 8em;
+}
+
+.list-container::-moz-scrollbar {
+    height: 0.7em;
+}
+
+.list-container::-moz-scrollbar-thumb {
+    background-color: #212121;
+}
+
+.list-container::-moz-scrollbar-track {
+    background-color: #fbfbfb;
+}
+
+.list-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #212121;
+    border-radius: 10px;
+    background-color: #fbfbfb;
+}
+
+.list-container::-webkit-scrollbar {
+    height: 0.7em;
+    border-radius: 10px;
+    background-color: #fbfbfb;
+}
+
+.list-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #212121;
+    background-color: #212121;
 }
 
 .list {
@@ -155,7 +185,11 @@ form {
     padding: 1em;
     border-radius: 10px;
     width: 20em;
+    max-width: 20em;
     min-width: 20em;
+    /* min-height: 20em; */
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .list h2 {
@@ -167,6 +201,14 @@ form {
     align-items: center;
     overflow-x: auto;
     overflow-y: hidden;
+}
+
+.list h2::-moz-scrollbar {
+    display: none;
+}
+
+.list h2::-webkit-scrollbar {
+    display: none;
 }
 
 .input-white {
@@ -232,11 +274,43 @@ i {
 .is-dragging {
     background-color: #212121;
     color: #fbfbfb;
-    transform: rotate(-12deg);
+    transform: rotate(-10deg);
 }
 
 .mine {
     margin: 0em;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.mine::-moz-scrollbar {
+    height: 0.5em;
+}
+
+.mine::-moz-scrollbar-thumb {
+    background-color: #212121;
+}
+
+.mine::-moz-scrollbar-track {
+    background-color: #fbfbfb;
+}
+
+.mine::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #212121;
+    border-radius: 10px;
+    background-color: #fbfbfb;
+}
+
+.mine::-webkit-scrollbar {
+    height: 0.5em;
+    border-radius: 10px;
+    background-color: #fbfbfb;
+}
+
+.mine::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #212121;
+    background-color: #212121;
 }
 
 .comment {
@@ -249,6 +323,43 @@ i {
     align-items: center;
 }
 
+.span-comment {
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    margin: 0em;
+}
+
+.span-comment::-moz-scrollbar {
+    height: 0.5em;
+}
+
+.span-comment::-moz-scrollbar-thumb {
+    background-color: #212121;
+}
+
+.span-comment::-moz-scrollbar-track {
+    background-color: #fbfbfb;
+}
+
+.span-comment::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #212121;
+    border-radius: 10px;
+    background-color: #fbfbfb;
+}
+
+.span-comment::-webkit-scrollbar {
+    height: 0.5em;
+    border-radius: 10px;
+    background-color: #fbfbfb;
+}
+
+.span-comment::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #212121;
+    background-color: #212121;
+}
+
 .task-comment {
     width: 100%;
     text-align: left;
@@ -256,6 +367,39 @@ i {
     display: flex;
     align-items: center;
     font-size: 0.8em;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.task-comment::-moz-scrollbar {
+    height: 0.7em;
+}
+
+.task-comment::-moz-scrollbar-thumb {
+    background-color: #212121;
+}
+
+.task-comment::-moz-scrollbar-track {
+    background-color: #fbfbfb;
+}
+
+.task-comment::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #212121;
+    border-radius: 10px;
+    background-color: #fbfbfb;
+}
+
+.task-comment::-webkit-scrollbar {
+    height: 0.7em;
+    border-radius: 10px;
+    background-color: #fbfbfb;
+}
+
+.task-comment::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #212121;
+    background-color: #212121;
 }
 
 .comment-container {
@@ -285,6 +429,44 @@ i {
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
+}
+
+.scrollable {
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 20em;
+    max-height: 20em;
+    padding: 1em 0.3em;
+}
+
+.scrollable::-moz-scrollbar {
+    width: 0.7em;
+}
+
+.scrollable::-moz-scrollbar-thumb {
+    background-color: #212121;
+}
+
+.scrollable::-moz-scrollbar-track {
+    background-color: #fbfbfb;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #212121;
+    border-radius: 10px;
+    background-color: #fbfbfb;
+}
+
+.scrollable::-webkit-scrollbar {
+    width: 0.7em;
+    border-radius: 10px;
+    background-color: #fbfbfb;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px #212121;
+    background-color: #212121;
 }
 
 @media only screen and (max-width: 750px) {

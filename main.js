@@ -72,6 +72,10 @@ form.addEventListener("submit", (event) => {
     listButton.addEventListener("click", makeTask);
     row.appendChild(listButton);
 
+    let appendedList = document.createElement('div')
+    appendedList.className = "scrollable"
+    newList.appendChild(appendedList)
+
     userInput.value = "";
 });
 
@@ -79,18 +83,20 @@ function makeTask(event) {
     event.preventDefault();
 
     let submitTask = event.target;
-    let list = submitTask.parentNode.parentNode;
-
     let userTodo = submitTask.previousElementSibling.value;
+    // console.log(submitTask.previousElementSibling.value);
+    let list = submitTask.parentNode.nextSibling;
+    console.log(list)
 
-    console.log(submitTask.previousElementSibling.value);
 
     if (!userTodo) return;
+
 
     let newWork = document.createElement("p");
     newWork.setAttribute("class", "task-flex");
     newWork.className += " task";
     newWork.setAttribute("draggable", "true");
+    list.appendChild(newWork);
 
     let taskRow = document.createElement("span");
     taskRow.className += " task-upper-row";
@@ -104,7 +110,6 @@ function makeTask(event) {
         newWork.className = "task";
     });
 
-    list.appendChild(newWork);
 
     let span = document.createElement("p");
     span.setAttribute("class", "mine");
@@ -140,7 +145,7 @@ function makeTask(event) {
 
     // Update draggables and droppables after adding a new task
     let draggables = list.querySelectorAll(".task");
-    let droppables = document.querySelectorAll(".list");
+    let droppables = document.querySelectorAll(".scrollable");
 
     draggables.forEach((task) => {
         task.addEventListener("dragstart", () => {
@@ -236,8 +241,11 @@ function commentColumn(event) {
     if (newComment !== null && newComment.trim() !== "") {
         let comment = document.createElement("p");
         comment.className += " comment";
-        comment.textContent = newComment;
         commentContainer.appendChild(comment);
+        let commentText = document.createElement("p");
+        commentText.className += " span-comment"
+        commentText.textContent = newComment
+        comment.appendChild(commentText)
         let commentDelete = document.createElement("p");
         commentDelete.innerHTML = "<i class='bi bi-trash-fill'></i>";
         commentDelete.className += " comment-delete-margin";
