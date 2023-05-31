@@ -28,7 +28,7 @@ form.addEventListener("submit", (event) => {
         "class",
         "btn btn-primary btn-sm delete-column-button"
     );
-    commentButton.innerHTML = '<i class="bi bi-chat-dots-fill"></i>';
+    commentButton.innerHTML = '<i class="bi bi-chat-left-text-fill"></i>';
     commentButton.addEventListener("click", commentColumn);
     rowSecond.appendChild(commentButton);
 
@@ -121,7 +121,7 @@ function makeTask(event) {
     taskRow.appendChild(row);
 
     let commentTask = document.createElement("i");
-    commentTask.className += " bi bi-chat-dots-fill task-delete-button";
+    commentTask.className += " bi bi-chat-left-text-fill task-delete-button";
     commentTask.addEventListener("click", commentPresentTask);
     row.appendChild(commentTask);
 
@@ -247,7 +247,7 @@ function commentColumn(event) {
         commentText.textContent = newComment
         comment.appendChild(commentText)
         let commentDelete = document.createElement("p");
-        commentDelete.innerHTML = "<i class='bi bi-trash-fill'></i>";
+        commentDelete.innerHTML = "<i class='bi bi-x-octagon-fill'></i>";
         commentDelete.className += " comment-delete-margin";
         commentDelete.addEventListener("click", commentColumnDelete);
         comment.appendChild(commentDelete);
@@ -282,7 +282,7 @@ function commentPresentTask(event) {
         TaskCommentRow.appendChild(comment);
         //
         let commentDelete = document.createElement("p");
-        commentDelete.innerHTML = "<i class='bi bi-trash-fill'></i>";
+        commentDelete.innerHTML = "<i class='bi bi-x-octagon-fill'></i>";
         commentDelete.addEventListener("click", deleteTaskComment);
         commentDelete.className += " comment-delete-margin";
         TaskCommentRow.appendChild(commentDelete);
