@@ -63,6 +63,7 @@ form.addEventListener("submit", (event) => {
     let listInput = document.createElement("input");
     listInput.setAttribute("type", "text");
     listInput.setAttribute("placeholder", "Enter Task...");
+    listInput.addEventListener("keypress", makeTaskInput);
     listInput.className = "input-white";
     row.appendChild(listInput);
 
@@ -72,12 +73,106 @@ form.addEventListener("submit", (event) => {
     listButton.addEventListener("click", makeTask);
     row.appendChild(listButton);
 
-    let appendedList = document.createElement('div')
-    appendedList.className = "scrollable"
-    newList.appendChild(appendedList)
+    let appendedList = document.createElement("div");
+    appendedList.className = "scrollable";
+    newList.appendChild(appendedList);
 
     userInput.value = "";
 });
+
+function makeTaskInput(event) {
+    if (event.key === "Enter") {
+        // console.log(event.key);
+        event.preventDefault();
+
+        let submitTask = event.target;
+        let userTodo = submitTask.value;
+        // console.log(userTodo);
+        // console.log(submitTask.previousElementSibling.value);
+        let list = submitTask.parentNode.nextSibling;
+        // console.log(list);
+
+        if (!userTodo) return;
+
+        let newWork = document.createElement("p");
+        newWork.setAttribute("class", "task-flex");
+        newWork.className += " task";
+        newWork.setAttribute("draggable", "true");
+        list.appendChild(newWork);
+
+        let taskRow = document.createElement("span");
+        taskRow.className += " task-upper-row";
+        newWork.appendChild(taskRow);
+
+        newWork.addEventListener("dragstart", () => {
+            newWork.className += " is-dragging";
+        });
+
+        newWork.addEventListener("dragend", () => {
+            newWork.className = "task";
+        });
+
+        let span = document.createElement("p");
+        span.setAttribute("class", "mine");
+        span.innerText = userTodo;
+        taskRow.appendChild(span);
+
+        let row = document.createElement("div");
+        row.className += " row-task";
+        taskRow.appendChild(row);
+
+        let commentTask = document.createElement("i");
+        commentTask.className += " bi bi-chat-left-text-fill task-delete-button";
+        commentTask.addEventListener("click", commentPresentTask);
+        row.appendChild(commentTask);
+
+        let editTask = document.createElement("i");
+        editTask.className += " bi bi-pencil-fill task-delete-button";
+        editTask.addEventListener("click", editPresentTask);
+        row.appendChild(editTask);
+
+        let deleteTask = document.createElement("i");
+        deleteTask.className += " bi bi-trash-fill task-delete-button";
+        deleteTask.addEventListener("click", deletePresentTask);
+        row.appendChild(deleteTask);
+
+        let comment = document.createElement("p");
+        comment.className += " task-comment";
+        let userComment = "";
+        comment.innerText = userComment;
+        newWork.appendChild(comment);
+
+        event.target.value = "";
+
+        // Update draggables and droppables after adding a new task
+        let draggables = list.querySelectorAll(".task");
+        let droppables = document.querySelectorAll(".scrollable");
+
+        draggables.forEach((task) => {
+            task.addEventListener("dragstart", () => {
+                task.className += " is-dragging";
+            });
+            task.addEventListener("dragend", () => {
+                task.className = "task";
+            });
+        });
+
+        droppables.forEach((zone) => {
+            zone.addEventListener("dragover", (e) => {
+                e.preventDefault();
+
+                let bottomTask = insertAboveTask(zone, e.clientY);
+                let curTask = document.querySelector(".is-dragging");
+
+                if (!bottomTask) {
+                    zone.appendChild(curTask);
+                } else {
+                    zone.insertBefore(curTask, bottomTask);
+                }
+            });
+        });
+    }
+}
 
 function makeTask(event) {
     event.preventDefault();
@@ -86,11 +181,9 @@ function makeTask(event) {
     let userTodo = submitTask.previousElementSibling.value;
     // console.log(submitTask.previousElementSibling.value);
     let list = submitTask.parentNode.nextSibling;
-    console.log(list)
-
+    // console.log(list);
 
     if (!userTodo) return;
-
 
     let newWork = document.createElement("p");
     newWork.setAttribute("class", "task-flex");
@@ -109,7 +202,6 @@ function makeTask(event) {
     newWork.addEventListener("dragend", () => {
         newWork.className = "task";
     });
-
 
     let span = document.createElement("p");
     span.setAttribute("class", "mine");
@@ -243,9 +335,9 @@ function commentColumn(event) {
         comment.className += " comment";
         commentContainer.appendChild(comment);
         let commentText = document.createElement("p");
-        commentText.className += " span-comment"
-        commentText.textContent = newComment
-        comment.appendChild(commentText)
+        commentText.className += " span-comment";
+        commentText.textContent = newComment;
+        comment.appendChild(commentText);
         let commentDelete = document.createElement("p");
         commentDelete.innerHTML = "<i class='bi bi-x-octagon-fill'></i>";
         commentDelete.className += " comment-delete-margin";

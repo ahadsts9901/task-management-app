@@ -473,18 +473,15 @@ i {
     body {
         font-size: 0.7em;
     }
-
     .input,
     .button,
     .task {
         font-size: 1.3em;
     }
-
     .center-p {
         width: 80%;
         font-size: 1.2em;
     }
-
     .center {
         font-size: 1.2em;
     }
